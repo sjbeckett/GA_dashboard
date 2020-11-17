@@ -141,6 +141,8 @@ box()
 plot(Dates,recordedCases,ylab="Cumulative cases",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-100000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -173,6 +175,8 @@ n3 = 75
 plot(AI_T,1-(1-pL)^n,col=NA,ylim=c(0,100),ylab="Risk one or more in a\ngroup are infectious (%)",xaxt="n",xaxs="i",xlab="",xlim=XLIM,cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -207,6 +211,8 @@ box()
 plot(Dates[2:(LREC)],recordedDPD,ylab="New recorded\ndeaths per day",xlab="",pch=19,xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -220,6 +226,8 @@ box()
 plot(Dates,recordedDeaths,ylab="Cumulative deaths",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -233,6 +241,8 @@ box()
 plot(Dates,currentHospitalised,xlim=XLIM,col=NA,xlab="",xaxt="n",xaxs="i",ylab="Currently hospitalized\nwith COVID-19",cex.lab=AXCEX2,cex.axis=AXCEX,ylim=c(0,max(currentHospitalised,na.rm=TRUE)+(max(currentHospitalised,na.rm=TRUE)-min(currentHospitalised,na.rm=TRUE))*0.04))
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -252,6 +262,8 @@ box()
 plot(Dates[2:(LREC)],recordedHPD,ylab="New recorded \nhospitalizations per day",xlab="",pch=19,xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=3,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -265,6 +277,8 @@ box()
 plot(Dates,recordedHospitalised,ylab="Cumulative hospitalizations",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -280,6 +294,8 @@ box()
 plot(Dates, PCRpercentToday, col=NA, ylab="% PCR tests positive per day",xlab="",xlim=XLIM,xaxt="n",xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 # #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
  SAT = SAT+7
@@ -299,6 +315,8 @@ YL[2]=YL[2]*1.1
  plot(Dates,PCRTotToday,col=NA,ylab="New PCR tests per day",xlab="",xlim=XLIM,xaxt="n",xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX,ylim=YL)
  axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
  SAT = SAT+7
@@ -320,6 +338,8 @@ box()
 plot(Dates,PCRcumulative,ylab="Cumulative PCR tests",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
  #WEEKENDS
+ SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-500000,-500000,50000000,50000000),col="grey",border=NA)
  SAT = SAT+7
