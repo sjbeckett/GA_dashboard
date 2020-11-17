@@ -30,7 +30,7 @@ ui <- fluidPage(
 
 		helpText("Ascertainment bias is the expected number of unrecorded cases for every recorded case and is the difference between our ability to measure those who are infectious and those who are actually infectious."),
 
-		helpText(tags$h3("Acknowledgements"),"This page shows COVID-19 related data for Georgia collected by ",tags$a(href="http://www.covidtracking.com","The COVID Tracking Project")," from local health resources. Code for this project is available at",tags$a(href="http://github.com/sjbeckett/GA_dashboard","http://github.com/sjbeckett/GA_dashboard")," and was developed by ",tags$a(href="http://sjbeckett.github.io", "Dr. Stephen Beckett"),"a research scientist at Georgia Tech.",br(),br(),tags$h4("Data notes"),"(1) Prior to 28 August 2020, current hospitalizations are confirmed hospitalized cases of COVID-19. Following this date, this data stream also includes probable hospitalized cases of COVID-19.",br(),"(2) Prior to 27 May 2020 test numbers include both antibody and PCR tests. Following this date only PCR data are shown. Note these discrepancies are related to how COVID-19 data has been/is reported on the",tags$a(href="https://dph.georgia.gov/covid-19-daily-status-report","Georgia Department of Health daily status update")," website.",br(),"(3) Note that the data collection is based on the reported dates for data, not the date of sympton onset.",br(),"(4) The risk that one (or more) people in a group are infectious is derived from the binomial distribution, assuming an infectious period of ten days and that we are only able to detect a subset of infectious individuals via testing. More detailed analysis of risk at regional levels for multiple countries (including US counties) is available at the",tags$a(href="https://covid19risk.biosci.gatech.edu/","COVID-19 Event Risk Assessment Planning Tool"),"website.",br(),"(5) Measuring the ascertainment bias is difficult. In the early stages of the epidemic this appears to be close to 10; it is likely to be closer to 5 now. Work on trying to quantify the ascertainment bias is ongoing."),
+		helpText(tags$h3("Acknowledgements"),"This page shows COVID-19 related data for Georgia collected by ",tags$a(href="http://www.covidtracking.com","The COVID Tracking Project")," from local health resources. Code for this project is available at",tags$a(href="http://github.com/sjbeckett/GA_dashboard","http://github.com/sjbeckett/GA_dashboard")," and was developed by ",tags$a(href="http://sjbeckett.github.io", "Dr. Stephen Beckett"),"a research scientist at Georgia Tech.",br(),br(),tags$h4("Data notes"),"(1) Prior to 28 August 2020, current hospitalizations are confirmed hospitalized cases of COVID-19. Following this date, this data stream also includes probable hospitalized cases of COVID-19.",br(),"(2) Note that the data collection is based on the reported dates for data, not the date of sympton onset.",br(),"(3) The risk that one (or more) people in a group are infectious is derived from the binomial distribution, assuming an infectious period of ten days and that we are only able to detect a subset of infectious individuals via testing. More detailed analysis of risk at regional levels for multiple countries (including US counties) is available at the",tags$a(href="https://covid19risk.biosci.gatech.edu/","COVID-19 Event Risk Assessment Planning Tool"),"website.",br(),"(4) Measuring the ascertainment bias is difficult. In the early stages of the epidemic this appears to be close to 10; it is likely to be closer to 5 now. Work on trying to quantify the ascertainment bias is ongoing."),
 
     ),
 
@@ -325,10 +325,6 @@ for (aa in 1:50){
 points(Dates,PCRTotToday,pch=19)
 lines(RA_PT,RA_PTot,col=COL,lwd=5)
 
-YL = max(PCRTotToday)
-DataChange = which(Dates=="2020-05-27")
-abline(v=Dates[DataChange],lwd=1,col="green")
-text(Dates[DataChange],YL*0.75,"Data source\nincludes both\nserology and\nPCR tests\nbefore\ngreen line.",cex=1.4,pos=2)
 
 legend("topleft",c("7 day moving average"),col=COL,lty=1,lwd=5, box.col = "lightblue", bg = "lightblue",cex=1.4)
 box()
@@ -346,11 +342,6 @@ for (aa in 1:50){
  SUN= SUN+7
 }
 points(Dates,PCRcumulative,pch=19)
-
-YL = max(PCRcumulative)
-DataChange = which(Dates=="2020-05-27")
-abline(v=Dates[DataChange],lwd=1,col="green")
-text(Dates[DataChange],YL*0.75,"Data source\nincludes both\nserology and\nPCR tests\nbefore\ngreen line.",cex=1.4,pos=2)
 
 
 box()
