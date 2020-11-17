@@ -28,7 +28,7 @@ ui <- fluidPage(
                   value = c(5,10)),
 
 
-		helpText("Ascertainment bias is the expected number of cases per every recorded case and is the difference between our ability to measure those who are infectious and those who are actually infectious."),
+		helpText("Ascertainment bias is the expected number of unrecorded cases for every recorded case and is the difference between our ability to measure those who are infectious and those who are actually infectious."),
 
 		helpText(tags$h3("Acknowledgements"),"This page shows COVID-19 related data for Georgia collected by ",tags$a(href="http://www.covidtracking.com","The COVID Tracking Project")," from local health resources. Code for this project is available at",tags$a(href="http://github.com/sjbeckett/GA_dashboard","http://github.com/sjbeckett/GA_dashboard")," and was developed by ",tags$a(href="http://sjbeckett.github.io", "Dr. Stephen Beckett"),"a research scientist at Georgia Tech.",br(),br(),tags$h4("Data notes"),"(1) Prior to 28 August 2020, current hospitalizations are confirmed hospitalized cases of COVID-19. Following this date, this data stream also includes probable hospitalized cases of COVID-19.",br(),"(2) Prior to 27 May 2020 test numbers include both antibody and PCR tests. Following this date only PCR data are shown. Note these discrepancies are related to how COVID-19 data has been/is reported on the",tags$a(href="https://dph.georgia.gov/covid-19-daily-status-report","Georgia Department of Health daily status update")," website.",br(),"(3) Note that the data collection is based on the reported dates for data, not the date of sympton onset.",br(),"(4) The risk that one (or more) people in a group are infectious is derived from the binomial distribution, assuming an infectious period of ten days and that we are only able to detect a subset of infectious individuals via testing. More detailed analysis of risk at regional levels for multiple countries (including US counties) is available at the",tags$a(href="https://covid19risk.biosci.gatech.edu/","COVID-19 Event Risk Assessment Planning Tool"),"website.",br(),"(5) Measuring the ascertainment bias is difficult. In the early stages of the epidemic this appears to be close to 10; it is likely to be closer to 5 now. Work on trying to quantify the ascertainment bias is ongoing."),
 
@@ -53,7 +53,7 @@ COVIDTRACKER<- read.csv("https://covidtracking.com/data/download/georgia-history
 Probdeath = rev(COVIDTRACKER$deathProbable)
 recordedDeaths =  rev(COVIDTRACKER$death)
 recordedDeaths[!is.na(Probdeath)] = recordedDeaths[!is.na(Probdeath)] - Probdeath[!is.na(Probdeath)]
-recordedCases= rev(COVIDTRACKER$positiveCasesViral)
+recordedCases= rev(COVIDTRACKER$positive)
 recordedHospitalised = rev(COVIDTRACKER$hospitalized)
 currentHospitalised = rev(COVIDTRACKER$hospitalizedCurrently)
 PCRTotToday =  rev(COVIDTRACKER$totalTestsViralIncrease)
@@ -126,8 +126,8 @@ text(0,-1.,paste("Data: covidtracking.com; Figure: @BeckettStephen"),font=2,cex=
 plot(Dates[2:(LREC)],recordedCPD,ylab="New recorded\ncases per day",xlab="",pch =19,ylim=c(0,5000),xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
+SAT = Dates[4]
+SUN = Dates[5]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -141,8 +141,6 @@ box()
 plot(Dates,recordedCases,ylab="Cumulative cases",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-100000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -175,8 +173,6 @@ n3 = 75
 plot(AI_T,1-(1-pL)^n,col=NA,ylim=c(0,100),ylab="Risk one or more in a\ngroup are infectious (%)",xaxt="n",xaxs="i",xlab="",xlim=XLIM,cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -211,8 +207,6 @@ box()
 plot(Dates[2:(LREC)],recordedDPD,ylab="New recorded\ndeaths per day",xlab="",pch=19,xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -226,8 +220,6 @@ box()
 plot(Dates,recordedDeaths,ylab="Cumulative deaths",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -241,8 +233,6 @@ box()
 plot(Dates,currentHospitalised,xlim=XLIM,col=NA,xlab="",xaxt="n",xaxs="i",ylab="Currently hospitalized\nwith COVID-19",cex.lab=AXCEX2,cex.axis=AXCEX,ylim=c(0,max(currentHospitalised,na.rm=TRUE)+(max(currentHospitalised,na.rm=TRUE)-min(currentHospitalised,na.rm=TRUE))*0.04))
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -262,8 +252,6 @@ box()
 plot(Dates[2:(LREC)],recordedHPD,ylab="New recorded \nhospitalizations per day",xlab="",pch=19,xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=3,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -277,8 +265,6 @@ box()
 plot(Dates,recordedHospitalised,ylab="Cumulative hospitalizations",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
@@ -294,8 +280,6 @@ box()
 plot(Dates, PCRpercentToday, col=NA, ylab="% PCR tests positive per day",xlab="",xlim=XLIM,xaxt="n",xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 # #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
  SAT = SAT+7
@@ -315,8 +299,6 @@ YL[2]=YL[2]*1.1
  plot(Dates,PCRTotToday,col=NA,ylab="New PCR tests per day",xlab="",xlim=XLIM,xaxt="n",xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX,ylim=YL)
  axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
  SAT = SAT+7
@@ -338,8 +320,6 @@ box()
 plot(Dates,PCRcumulative,ylab="Cumulative PCR tests",xaxt="n",col=NA,xlab="",xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
  #WEEKENDS
-SAT = Dates[5]
-SUN = Dates[6]
 for (aa in 1:50){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-500000,-500000,50000000,50000000),col="grey",border=NA)
  SAT = SAT+7
