@@ -25,7 +25,7 @@ ui <- fluidPage(
                   label = "Ascertainment bias:",
                   min = 1,
                   max = 15,
-                  value = c(5,10)),
+                  value = c(3,6)),
 
 
 		helpText("Ascertainment bias is the expected number of unrecorded cases for every recorded case and is the difference between our ability to measure those who are infectious and those who are actually infectious."),
@@ -53,7 +53,7 @@ COVIDTRACKER<- read.csv("https://covidtracking.com/data/download/georgia-history
 Probdeath = rev(COVIDTRACKER$deathProbable)
 recordedDeaths =  rev(COVIDTRACKER$death)
 recordedDeaths[!is.na(Probdeath)] = recordedDeaths[!is.na(Probdeath)] - Probdeath[!is.na(Probdeath)]
-recordedCases= rev(COVIDTRACKER$positive)
+recordedCases= rev(COVIDTRACKER$positiveCasesViral)
 recordedHospitalised = rev(COVIDTRACKER$hospitalized)
 currentHospitalised = rev(COVIDTRACKER$hospitalizedCurrently)
 PCRTotToday =  rev(COVIDTRACKER$totalTestsViralIncrease)
@@ -123,12 +123,12 @@ text(0,-1.,paste("Data: covidtracking.com; Figure: @BeckettStephen"),font=2,cex=
 
 #CASES
 #per day
-plot(Dates[2:(LREC)],recordedCPD,ylab="New recorded\ncases per day",xlab="",pch =19,ylim=c(0,5000),xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
+plot(Dates[2:(LREC)],recordedCPD,ylab="New recorded\ncases per day",xlab="",pch =19,ylim=c(0,11000),xaxt="n",col=NA,xlim=XLIM,xaxs="i",cex.lab=AXCEX2,cex.axis=AXCEX)
 axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
@@ -143,8 +143,8 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
-	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-100000,500000,500000),col="grey",border=NA)
+for (aa in 1:length(Dates)){
+	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-100000,500000,5000000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
 }
@@ -177,7 +177,7 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
@@ -213,7 +213,7 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
@@ -228,8 +228,8 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
-	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,500000),col="grey",border=NA)
+for (aa in 1:length(Dates)){
+	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,5000000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
 }
@@ -243,7 +243,7 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
@@ -264,7 +264,7 @@ axis.Date(1,at=TIMES,format="%e %b",las=3,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
 	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-100,-100,500000,500000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
@@ -279,8 +279,8 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
-	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,500000),col="grey",border=NA)
+for (aa in 1:length(Dates)){
+	polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-10000,-10000,500000,5000000),col="grey",border=NA)
 	SAT = SAT+7
 	SUN= SUN+7
 }
@@ -296,7 +296,7 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
 # #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
  SAT = SAT+7
  SUN= SUN+7
@@ -317,7 +317,7 @@ YL[2]=YL[2]*1.1
 #WEEKENDS
 SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
+for (aa in 1:length(Dates)){
  polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-5000,-5000,500000,500000),col="grey",border=NA)
  SAT = SAT+7
  SUN= SUN+7
@@ -336,8 +336,8 @@ axis.Date(1,at=TIMES,format="%e %b",las=2,cex.axis=AXCEX)
  #WEEKENDS
  SAT = Dates[4]
 SUN = Dates[5]
-for (aa in 1:50){
- polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-500000,-500000,50000000,50000000),col="grey",border=NA)
+for (aa in 1:length(Dates)){
+ polygon(c(SAT - 0.5, SUN+0.5,SUN+0.5,SAT-0.5), c(-500000,-500000,50000000,500000000),col="grey",border=NA)
  SAT = SAT+7
  SUN= SUN+7
 }
